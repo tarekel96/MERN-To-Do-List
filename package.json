@@ -1,0 +1,28 @@
+{
+  "name": "mern-to-do-list",
+  "version": "1.0.0",
+  "description": "MERN-To-Do-List with Redux",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.5.14",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarekel96/MERN-To-Do-List.git"
+  },
+  "author": "tarek el-hajjaoui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tarekel96/MERN-To-Do-List/issues"
+  },
+  "homepage": "https://github.com/tarekel96/MERN-To-Do-List#readme"
+}
