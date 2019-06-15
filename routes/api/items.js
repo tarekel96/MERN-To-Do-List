@@ -1,34 +1,29 @@
 const express = require("express");
-const Items = require("../../models/Items");
 const router = express.Router();
+// const Items = require("../../models/Items");
+const itemsController = require("../../controllers/items/itemsController");
 
-// @route get - gets all items
-router.get("/", (req, res) => {
-  Items.find()
-    .sort({ date: -1 })
-    .then(items => res.json(items))
-    .catch(err => console.log(err));
-});
+const {
+  findAll,
+  findById,
+  createItem,
+  deleteById,
+  updateById
+} = itemsController;
 
-// @route post - posts a new item
-router.post("/", (req, res) => {
-  const { name } = req.body;
-  const newItem = new Items({
-    name
-  });
-  newItem.save().then(item => res.json(item));
-});
+// @route '/items' get - gets all items
+router.get("/", findAll);
 
-// @route delete - deletes an item
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  Items.findById(id)
-    .then(item => item.remove().then(item => res.json({ success: true })))
-    .catch(err =>
-      res.json({
-        sucess: false
-      })
-    );
-});
+// @route '/items/:id' get - finds an item by id
+router.get("/:id", findById);
+
+// @route '/items' post - posts a new item
+router.post("/", createItem);
+
+// @route '/items/:id' delete - deletes an item by id
+router.delete("/:id", deleteById);
+
+// @route '/items/:id' put - updates an item by id
+router.put("/:id", updateById);
 
 module.exports = router;
