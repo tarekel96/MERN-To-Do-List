@@ -1,62 +1,76 @@
 import React, { Component } from "react";
 import { ListGroup, ListGroupItem, Container, Button } from "reactstrap";
-import uuid from "uuid";
+import { getItems, deleteItem } from "../actions/item-actions.js";
+import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
+import ItemModal from "./ItemModal";
 
 class List extends Component {
-  state = {
-    items: [
-      {
-        name: "Do laundry",
-        id: 1
-      },
-      {
-        name: "Take out the trash",
-        id: 2
-      },
-      {
-        name: "Clean the garage",
-        id: 3
-      }
-    ]
+  componentDidMount() {
+    // console.log(this.props);
+    this.props.getItems();
+  }
+
+  handleDelete = id => {
+    this.props.deleteItem(id);
   };
 
   render() {
+    const { items } = this.props.item;
+
     return (
       <Container>
         <ListGroup>
-          {this.state.items.map(({ name, id }) => (
+          {items.map(({ name, id }) => (
             <ListGroupItem key={id}>
               {name}
               <Button
                 className="remove-btn float-right"
                 size="sm"
                 color="danger"
-                onClick={() => {
-                  this.setState(prevState => ({
-                    items: prevState.items.filter(item => item.id !== id)
-                  }));
-                }}
+                onClick={
+                  this.handleDelete.bind(this, id)
+                  // this.setState(prevState => ({
+                  //   items: prevState.items.filter(item => item.id !== id)
+                  // }));
+                }
               >
                 &times;
               </Button>
             </ListGroupItem>
           ))}
-          <Button
-            onClick={() => {
-              const newItem = prompt("What is the new to do item?");
-              newItem
-                ? this.setState(prevState => ({
-                    items: [...prevState.items, { name: newItem, id: uuid() }]
-                  }))
-                : console.log("No item was typed in");
-            }}
+          {/* <Button
+          onClick={() => {
+          }}
+          onClick={() => {
+            const newItem = prompt("What is the new to do item?");
+            newItem
+              ? this.setState(prevState => ({
+                  items: [...prevState.items, { name: newItem, id: uuid() }]
+                }))
+              : console.log("No item was typed in");
+          }}
           >
             Add a To Do
-          </Button>
+          </Button> */}
         </ListGroup>
+        <ItemModal className={""} />
       </Container>
     );
   }
 }
 
-export default List;
+List.propTypes = {
+  getItems: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+  deleteItems: PropTypes.func
+};
+
+const mapStateToProps = state => ({
+  item: state.item
+});
+
+export default connect(
+  mapStateToProps,
+  { getItems, deleteItem }
+)(List);

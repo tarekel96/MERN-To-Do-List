@@ -18,7 +18,13 @@ class NavbarCom extends Component {
   render() {
     return (
       <Navbar color="dark" dark expand="lg">
-        <NavbarBrand>To Do List</NavbarBrand>
+        <NavbarBrand
+          style={{
+            color: "snow"
+          }}
+        >
+          To Do List
+        </NavbarBrand>
         <Container>
           <NavbarToggler
             className="mr-auto"
