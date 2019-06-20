@@ -31,18 +31,11 @@ export const itemReducer = (state = initalState, action) => {
       };
 
     case ADD_ITEM:
-      return {};
-    // case ADD_ITEM:
-    //   return [
-    //     ...initalState.items,
-    //     {
-    //       id: uuid(),
-    //       name: action.name
-    //     }
-    //   ];
+      return {
+        ...state,
+        items: [action.payload, ...state.items]
+      };
     default:
       return state;
   }
 };
-
-// export default itemReducer;

@@ -2,16 +2,38 @@ import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
 import { addItem } from "../actions/item-actions";
-import { toggleModal } from "../actions/modal-actions";
+import uuid from "uuid";
 
 class ItemModal extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      modal: false,
+      item: ""
+    };
+  }
+
   toggle = () => {
-    this.props.toggleModal();
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    // addItem()
+    const { item } = this.state;
+    const newItem = {
+      item,
+      id: uuid()
+    };
+    this.props.addItem(newItem);
+    this.toggle();
   };
 
   render() {
@@ -25,7 +47,7 @@ class ItemModal extends React.Component {
         >
           Add a To Do
         </Button>
-        <Modal isOpen={this.props.modal.modal} toggle={this.toggle}>
+        <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <form onSubmit={this.handleSubmit}>
             <ModalHeader
               style={{
@@ -45,7 +67,12 @@ class ItemModal extends React.Component {
                 >
                   New To Do:
                 </label>
-                <input type="text" name="new-item" />
+                <input
+                  onChange={this.handleChange}
+                  type="text"
+                  value={this.state.item}
+                  name="item"
+                />
               </div>
             </ModalBody>
             <ModalFooter>
@@ -68,11 +95,10 @@ class ItemModal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  item: state.item,
-  modal: state.modal
+  item: state.item
 });
 
 export default connect(
   mapStateToProps,
-  { addItem, toggleModal }
+  { addItem }
 )(ItemModal);
