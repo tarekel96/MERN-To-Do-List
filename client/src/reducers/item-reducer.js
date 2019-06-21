@@ -1,27 +1,22 @@
-import uuid from "uuid";
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM } from "../actions/types.js";
+import {
+  GET_ITEMS,
+  ADD_ITEM,
+  DELETE_ITEM,
+  ITEMS_LOADING
+} from "../actions/types.js";
 
-const initalState = {
-  items: [
-    {
-      name: "Do laundry",
-      id: uuid()
-    },
-    {
-      name: "Take out the trash",
-      id: uuid()
-    },
-    {
-      name: "Clean the garage",
-      id: uuid()
-    }
-  ]
+let initalState = {
+  items: [],
+  loading: false
 };
+
 export const itemReducer = (state = initalState, action) => {
   switch (action.type) {
     case GET_ITEMS:
       return {
-        ...state
+        ...state,
+        items: action.payload,
+        loading: false
       };
 
     case DELETE_ITEM:
@@ -34,6 +29,11 @@ export const itemReducer = (state = initalState, action) => {
       return {
         ...state,
         items: [action.payload, ...state.items]
+      };
+    case ITEMS_LOADING:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;

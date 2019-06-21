@@ -21,15 +21,15 @@ class List extends Component {
     return (
       <Container>
         <ListGroup>
-          {items.map(({ name, id }) => (
-            <ListGroupItem key={id}>
+          {items.map(({ name, _id }) => (
+            <ListGroupItem key={_id}>
               {name}
               <Button
                 className="remove-btn float-right"
                 size="sm"
                 color="danger"
                 onClick={
-                  this.handleDelete.bind(this, id)
+                  this.handleDelete.bind(this, _id)
                   // this.setState(prevState => ({
                   //   items: prevState.items.filter(item => item.id !== id)
                   // }));
