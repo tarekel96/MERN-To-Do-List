@@ -27,8 +27,8 @@ module.exports = {
     newItem.save().then(item => res.json(item));
   },
   deleteById: (req, res) => {
-    const { id } = req.params;
-    Items.findById(id)
+    const { _id } = req.params;
+    Items.findById(_id)
       .then(item => item.remove().then(item => res.json({ success: true })))
       .catch(err =>
         res.json({

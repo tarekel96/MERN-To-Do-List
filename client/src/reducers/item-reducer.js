@@ -5,7 +5,7 @@ import {
   ITEMS_LOADING
 } from "../actions/types.js";
 
-let initalState = {
+const initalState = {
   items: [],
   loading: false
 };
@@ -22,7 +22,7 @@ export const itemReducer = (state = initalState, action) => {
     case DELETE_ITEM:
       return {
         ...state,
-        items: state.items.filter(item => item.id !== action.payload)
+        items: state.items.filter(item => item._id !== action.id)
       };
 
     case ADD_ITEM:
@@ -33,7 +33,7 @@ export const itemReducer = (state = initalState, action) => {
     case ITEMS_LOADING:
       return {
         ...state,
-        loading: false
+        loading: true
       };
     default:
       return state;

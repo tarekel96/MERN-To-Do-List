@@ -11,8 +11,8 @@ class List extends Component {
     this.props.getItems();
   }
 
-  handleDelete = id => {
-    this.props.deleteItem(id);
+  handleDelete = _id => {
+    this.props.deleteItem(_id);
   };
 
   render() {

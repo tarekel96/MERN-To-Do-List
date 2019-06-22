@@ -21,7 +21,7 @@ router.get("/:id", findById);
 router.post("/", createItem);
 
 // @route '/items/:id' DELETE - deletes an item by id
-router.delete("/:id", deleteById);
+router.delete("/:_id", deleteById);
 
 // @route '/items/:id' PUT - updates an item by id
 router.put("/:id", updateById);

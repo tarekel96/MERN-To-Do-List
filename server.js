@@ -7,6 +7,8 @@ const app = express();
 
 app.use(express.json()); // express body parsing middleware that allows access to the body of incoming requests
 
+app.use(express.urlencoded({ extended: false }));
+
 // enables React client the ability to send requests to Express backend
 app.use(cors());
 

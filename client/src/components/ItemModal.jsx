@@ -2,14 +2,13 @@ import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
 import { addItem } from "../actions/item-actions";
-import uuid from "uuid";
 
 class ItemModal extends React.Component {
   constructor() {
     super();
     this.state = {
       modal: false,
-      item: ""
+      name: ""
     };
   }
 
@@ -27,10 +26,9 @@ class ItemModal extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { item } = this.state;
+    const { name } = this.state;
     const newItem = {
-      item,
-      id: uuid()
+      name
     };
     this.props.addItem(newItem);
     this.toggle();
@@ -70,8 +68,8 @@ class ItemModal extends React.Component {
                 <input
                   onChange={this.handleChange}
                   type="text"
-                  value={this.state.item}
-                  name="item"
+                  value={this.state.name}
+                  name="name"
                 />
               </div>
             </ModalBody>

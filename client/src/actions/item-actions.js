@@ -11,24 +11,46 @@ export const getItems = () => dispatch => {
         type: GET_ITEMS,
         payload: items
       })
-    );
+    )
+    .catch(err => console.log(err));
 };
 
-export const addItem = ({ item, id }) => {
-  return {
-    type: ADD_ITEM,
-    payload: {
-      name: item,
-      id
+export const addItem = name => dispatch => {
+  fetch("/items", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "Access-Control-Origin": "*"
+    },
+    body: JSON.stringify(name)
+  })
+    .then(res => res.json())
+    .then(item =>
+      dispatch({
+        type: ADD_ITEM,
+        payload: item
+      })
+    )
+    .catch(err => console.log(err));
+};
+
+export const deleteItem = _id => dispatch => {
+  fetch("/items/" + _id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
     }
-  };
-};
-
-export const deleteItem = id => {
-  return {
-    type: DELETE_ITEM,
-    payload: id
-  };
+  })
+    .then(item =>
+      dispatch({
+        type: DELETE_ITEM,
+        payload: item,
+        id: _id
+      })
+    )
+    .catch(err => console.log(err));
 };
 
 export const loadItems = () => {
