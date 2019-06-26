@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const router = require("./routes/api/items.js");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
@@ -24,7 +23,8 @@ mongoose
 
 const PORT = 5000 || process.env.PORT;
 
-app.use("/items", router);
+app.use("/items", require("./routes/api/items.js"));
+app.use("/users", require("./routes/api/users.js"));
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port: ${PORT}`);

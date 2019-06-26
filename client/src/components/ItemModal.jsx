@@ -37,7 +37,6 @@ class ItemModal extends React.Component {
   render() {
     return (
       <div>
-        {/* {console.log(this.props.modal.modal)} */}
         <Button
           color="danger"
           onClick={this.toggle}

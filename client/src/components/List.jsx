@@ -3,7 +3,7 @@ import { ListGroup, ListGroupItem, Container, Button } from "reactstrap";
 import { getItems, deleteItem } from "../actions/item-actions.js";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-import ItemModal from "./ItemModal";
+// import ItemModal from "./ItemModal";
 
 class List extends Component {
   componentDidMount() {
@@ -20,6 +20,7 @@ class List extends Component {
 
     return (
       <Container>
+        {/* <ItemModal /> */}
         <ListGroup>
           {items.map(({ name, _id }) => (
             <ListGroupItem key={_id}>
@@ -54,7 +55,6 @@ class List extends Component {
             Add a To Do
           </Button> */}
         </ListGroup>
-        <ItemModal className={""} />
       </Container>
     );
   }
