@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-// const Items = require("../../models/Items");
 const itemsController = require("../../controllers/items/itemsController");
+const auth = require("../../middleware/auth.js");
 
 const {
   findAll,
@@ -18,10 +18,10 @@ router.get("/", findAll);
 router.get("/:id", findById);
 
 // @route '/items' POST - posts a new item
-router.post("/", createItem);
+router.post("/", auth, createItem);
 
 // @route '/items/:id' DELETE - deletes an item by id
-router.delete("/:_id", deleteById);
+router.delete("/:_id", auth, deleteById);
 
 // @route '/items/:id' PUT - updates an item by id
 router.put("/:id", updateById);

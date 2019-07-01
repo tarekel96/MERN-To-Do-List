@@ -6,6 +6,7 @@ class SignupModal extends React.Component {
     super();
     this.state = {
       modal: false,
+      name: "",
       email: "",
       username: "",
       password: ""
@@ -62,6 +63,16 @@ class SignupModal extends React.Component {
 
             <ModalBody>
               <div className={"mx-auto d-block text-center"}>
+                <div>
+                  <label>Name</label>
+                  <input
+                    className="w-100"
+                    onChange={this.handleChange}
+                    type="text"
+                    value={this.state.name}
+                    name="name"
+                  />
+                </div>
                 <div>
                   <label>Email</label>
                   <input

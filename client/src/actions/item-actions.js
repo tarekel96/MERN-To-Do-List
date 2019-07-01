@@ -46,8 +46,7 @@ export const deleteItem = _id => dispatch => {
     .then(item =>
       dispatch({
         type: DELETE_ITEM,
-        payload: item,
-        id: _id
+        payload: _id
       })
     )
     .catch(err => console.log(err));

@@ -30,11 +30,7 @@ module.exports = {
     const { _id } = req.params;
     Items.findById(_id)
       .then(item => item.remove().then(item => res.json({ success: true })))
-      .catch(err =>
-        res.json({
-          sucess: false
-        })
-      );
+      .catch(err => res.sendStatus(404));
   },
   updateById: (req, res) => {
     const { id } = req.params;

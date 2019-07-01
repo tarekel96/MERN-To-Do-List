@@ -22,7 +22,7 @@ export const itemReducer = (state = initalState, action) => {
     case DELETE_ITEM:
       return {
         ...state,
-        items: state.items.filter(item => item._id !== action.id)
+        items: state.items.filter(item => item._id !== action.payload)
       };
 
     case ADD_ITEM:
